@@ -20,7 +20,7 @@ CSV・Excel形式の研究データを読み込み、**記述統計量の作成*
 
 ## 出力例
 
-![出力例](docs/images/example-output.png)
+![出力例](docs/images/example-output.svg)
 
 ## Codespacesで最短実行
 

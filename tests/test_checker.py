@@ -96,9 +96,19 @@ def test_cli_smoke_test(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> N
     output_path = tmp_path / "result"
     input_path.write_text("id,value\n1,10\n2,20\n", encoding="utf-8")
 
-    exit_code = main([str(input_path), "--output-dir", str(output_path)])
+    preview_path = tmp_path / "preview.png"
+    exit_code = main(
+        [
+            str(input_path),
+            "--output-dir",
+            str(output_path),
+            "--preview-path",
+            str(preview_path),
+        ]
+    )
     captured = capsys.readouterr()
 
     assert exit_code == 0
     assert "Rows: 2 | Columns: 2" in captured.out
     assert (output_path / "summary.xlsx").exists()
+    assert preview_path.exists()

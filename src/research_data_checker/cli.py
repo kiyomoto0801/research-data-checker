@@ -8,6 +8,7 @@ from pathlib import Path
 
 from . import __version__
 from .checker import check_quality, load_data, save_results, summarize
+from .preview import save_preview_image
 
 
 def _parse_sheet(value: str) -> str | int:
@@ -27,6 +28,12 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=Path("output"),
         help="Output directory (default: output)",
+    )
+    parser.add_argument(
+        "--preview-path",
+        type=Path,
+        default=Path("docs/images/example-output.png"),
+        help="PNG preview path (default: docs/images/example-output.png)",
     )
     parser.add_argument(
         "--missing-threshold",
@@ -62,6 +69,11 @@ def main(argv: list[str] | None = None) -> int:
         summary = summarize(data)
         warnings = check_quality(data, args.missing_threshold, args.id_cols)
         excel_path, warning_path = save_results(summary, warnings, args.output_dir)
+        preview_path = save_preview_image(
+            summary,
+            args.preview_path,
+            args.input_file.name,
+        )
     except (FileNotFoundError, ValueError, OSError) as error:
         print(f"Error: {error}", file=sys.stderr)
         return 1
@@ -69,6 +81,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Rows: {len(data):,} | Columns: {len(data.columns):,}")
     print(f"Summary: {excel_path}")
     print(f"Warnings: {warning_path}")
+    print(f"Preview: {preview_path}")
     return 0
 
 
