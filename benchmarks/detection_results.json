@@ -1,0 +1,11 @@
+{
+  "expected_issue_types": 4,
+  "detected_issue_types": 4,
+  "detection_rate_percent": 100.0,
+  "detected": [
+    "duplicate_id_combination",
+    "duplicate_rows",
+    "high_missing_rate",
+    "negative_values"
+  ]
+}
