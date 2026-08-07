@@ -1,0 +1,32 @@
+# User data and generated results
+data/
+output/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Environment and secrets
+.env
+.env.*
+
+# Editors and OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.toc
